@@ -1,0 +1,23 @@
+:root {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #1b1f24;
+  background-color: #f3f5f8;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #edf2fa, #f7f9fc);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
