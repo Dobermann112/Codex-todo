@@ -1,73 +1,56 @@
-# React + TypeScript + Vite
+# Codex Todo App (React + TypeScript)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Codexを使って作成した、シンプルなTodoリストアプリです。  
+React + TypeScriptをベースに、基本操作とローカル永続化を実装しています。
 
-Currently, two official plugins are available:
+## 主な技術領域
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- フロントエンド: React
+- 言語: TypeScript
+- ビルドツール: Vite
+- スタイリング: CSS
+- データ永続化: `localStorage`
 
-## React Compiler
+## 主な機能
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- タスク追加
+- タスク削除
+- 完了チェックの切り替え
+- フィルタ表示
+  - `all`（すべて）
+  - `active`（未完了）
+  - `completed`（完了済み）
+- タスク編集（保存 / キャンセル、Enter / Escape対応）
+- リロード後もタスクを保持（`localStorage`）
 
-## Expanding the ESLint configuration
+## コンポーネント構成
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `App`
+  - Todo状態管理、フィルタ管理、各種ハンドラ（追加・削除・完了・編集）
+  - `localStorage` への保存と復元
+- `TodoInput`
+  - 新規タスク入力と追加
+- `FilterTabs`
+  - 表示フィルタ切り替えUI
+- `TodoList`
+  - 表示対象タスク一覧の描画
+- `TodoItem`
+  - 単一タスク表示、完了切替、編集、削除
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## セットアップと実行
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## ビルド
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
+
+## 補足
+
+- タスクデータはブラウザの`localStorage`キー `todo-app-tasks` に保存されます。
+- 保存データが不正な形式の場合は安全に無視し、空リストで起動します。
